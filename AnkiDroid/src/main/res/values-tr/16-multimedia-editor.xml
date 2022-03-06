@@ -36,6 +36,7 @@
     <!-- Main editor popup menu items -->
     <string name="multimedia_editor_popup_image">Resim ekle</string>
     <string name="multimedia_editor_popup_audio_clip">Ses klibi ekle</string>
+    <string name="multimedia_editor_popup_video_clip">Video klibi ekle</string>
     <string name="multimedia_editor_popup_audio">Ses kaydet</string>
     <string name="multimedia_editor_popup_text">Gelişmiş düzenleyici</string>
     <string name="multimedia_editor_popup_cloze">Boşluk doldurma</string>
@@ -89,7 +90,8 @@
     <!-- for buttons -->
     <string name="multimedia_editor_image_field_editing_galery">Galeri</string>
     <string name="multimedia_editor_image_field_editing_photo">Kamera</string>
-    <string name="multimedia_editor_image_field_editing_library">Kütüphane</string>
+    <string name="multimedia_editor_import_audio">Ses</string>
+    <string name="multimedia_editor_import_video">Video</string>
     <!-- General -->
     <!-- message on the progress dialog for the user to wait, means process -->
     <string name="multimedia_editor_general_downloading">İndiriliyor</string>
@@ -121,8 +123,8 @@
     <!-- Crop function-->
     <string name="crop_image">Bu resmi kırpmak istiyor musunuz?</string>
     <string name="crop_button">Görüntüyü kırp</string>
-    <string name="save_dialog_content">Current image size is %sMB. Default image size limit is 1MB. Do you want to crop it?</string>
-    <string name="select_image_failed">"Select image failed, Please retry"</string>
-    <string name="activity_result_unexpected">App returned an unexpected value. You may need to use a different app</string>
+    <string name="save_dialog_content">Geçerli resim boyutu %sMB. Varsayılan resim boyutu sınırı 1MB\'dir. Kırpmak istiyor musunuz?</string>
+    <string name="select_image_failed">"Resim seçilemedi, Lütfen tekrar deneyin"</string>
+    <string name="activity_result_unexpected">Uygulama beklenmeyen bir değer döndürdü. Farklı bir uygulama kullanmanız gerekebilir</string>
     <string name="audio_recording_field_list" comment="Displays a list of the field data in the note editor while audio recording is taking place">Alan İçeriği</string>
 </resources>

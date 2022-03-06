@@ -26,18 +26,23 @@ import android.net.Uri
 import android.text.TextUtils
 import android.view.View
 import android.webkit.JavascriptInterface
+import android.webkit.WebView
 import android.widget.TextView
 import com.github.zafarkhaja.semver.Version
 import com.google.android.material.snackbar.Snackbar
 import com.ichi2.anim.ActivityTransitionAnimation
 import com.ichi2.anki.UIUtils.showThemedToast
+import com.ichi2.anki.servicelayer.SearchService
+import com.ichi2.async.CollectionTask.SearchCards
+import com.ichi2.async.TaskListener
+import com.ichi2.async.TaskManager
 import com.ichi2.libanki.Consts.CARD_QUEUE
 import com.ichi2.libanki.Consts.CARD_TYPE
 import com.ichi2.libanki.Decks
+import com.ichi2.libanki.SortOrder
 import com.ichi2.utils.JSONException
 import com.ichi2.utils.JSONObject
 import timber.log.Timber
-import java.util.*
 
 open class AnkiDroidJsAPI(private val activity: AbstractFlashcardViewer) {
     /**
@@ -134,11 +139,15 @@ open class AnkiDroidJsAPI(private val activity: AbstractFlashcardViewer) {
                     true
                 }
                 versionSupplied.lessThan(versionCurrent) -> {
-                    showThemedToast(context, context.getString(R.string.update_js_api_version, cardSuppliedDeveloperContact), false)
+                    activity.runOnUiThread {
+                        showThemedToast(context, context.getString(R.string.update_js_api_version, cardSuppliedDeveloperContact), false)
+                    }
                     versionSupplied.greaterThanOrEqualTo(Version.valueOf(AnkiDroidJsAPIConstants.sMinimumJsApiVersion))
                 }
                 else -> {
-                    showThemedToast(context, context.getString(R.string.valid_js_api_version, cardSuppliedDeveloperContact), false)
+                    activity.runOnUiThread {
+                        showThemedToast(context, context.getString(R.string.valid_js_api_version, cardSuppliedDeveloperContact), false)
+                    }
                     false
                 }
             }
@@ -173,7 +182,9 @@ open class AnkiDroidJsAPI(private val activity: AbstractFlashcardViewer) {
             apiStatusJson = JSONObject.fromMap(mJsApiListMap).toString()
         } catch (j: JSONException) {
             Timber.w(j)
-            showThemedToast(context, context.getString(R.string.invalid_json_data, j.localizedMessage), false)
+            activity.runOnUiThread {
+                showThemedToast(context, context.getString(R.string.invalid_json_data, j.localizedMessage), false)
+            }
         }
         return apiStatusJson
     }
@@ -451,5 +462,51 @@ open class AnkiDroidJsAPI(private val activity: AbstractFlashcardViewer) {
     @JavascriptInterface
     fun ankiEnableVerticalScrollbar(scroll: Boolean) {
         activity.webView.isVerticalScrollBarEnabled = scroll
+    }
+
+    @JavascriptInterface
+    fun ankiSearchCardWithCallback(query: String) {
+        val task = SearchCards(query, SortOrder.UseCollectionOrdering(), 0, 0, 0)
+        val listener = SearchCardListener(activity.webView, context)
+        activity.runOnUiThread {
+            TaskManager.launchCollectionTask(task, listener)
+        }
+    }
+
+    class SearchCardListener(private val webView: WebView, private val context: Context) : TaskListener<List<CardBrowser.CardCache>, SearchService.SearchCardsResult>() {
+        override fun onPreExecute() {
+            // nothing to do
+        }
+
+        override fun onPostExecute(result: SearchService.SearchCardsResult) {
+            val searchResult: MutableList<String> = ArrayList()
+
+            if (result.result == null) {
+                webView.evaluateJavascript("console.log('${context.getString(R.string.search_card_js_api_no_results)}')", null)
+            }
+
+            for (s in result.result!!) {
+                val jsonObject = JSONObject()
+                val fieldsData = s.card.note().fields
+                val fieldsName = s.card.model().fieldsNames
+
+                val noteId = s.card.note().id
+                val cardId = s.card.id
+                jsonObject.put("cardId", cardId)
+                jsonObject.put("noteId", noteId)
+
+                val jsonFieldObject = JSONObject()
+                fieldsName.zip(fieldsData).forEach { pair ->
+                    jsonFieldObject.put(pair.component1(), pair.component2())
+                }
+                jsonObject.put("fieldsData", jsonFieldObject)
+
+                searchResult.add(jsonObject.toString())
+            }
+
+            // quote result to prevent JSON injection attack
+            val jsonEncodedString = org.json.JSONObject.quote(searchResult.toString())
+            webView.evaluateJavascript("ankiSearchCard($jsonEncodedString)", null)
+        }
     }
 }

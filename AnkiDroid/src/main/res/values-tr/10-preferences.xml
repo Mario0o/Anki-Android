@@ -68,7 +68,6 @@
     <string name="whiteboard_stroke_width" maxLength="41">Kontur genişliği</string>
     <string name="use_input_tag" maxLength="41">Cevabı karta yaz</string>
     <string name="use_input_tag_summ">Cevabı yazmak için kartın içinde bir metin giriş kutusu kullan</string>
-    <string name="dictionary" maxLength="41">Sözlüğe bak</string>
     <string name="reset_languages" maxLength="41">Dilleri sıfırla</string>
     <string name="reset_languages_summ">Bütün desteler için dil atamalarını sıfırla (metin okuma ve sözlükler için)</string>
     <string name="reset_languages_question">Tüm dil atamaları sıfırlansın mı?</string>
@@ -89,15 +88,14 @@
     <string-array name="answer_buttons_position_labels">
         <item>Yukarıda</item>
         <item>Aşağıda</item>
+        <item>Hiçbiri</item>
     </string-array>
     <string name="gestures" maxLength="41">El hareketlerini etkinleştir</string>
     <string name="gestures_summ">Cevap verme ve kart düzenleme gibi eylemlere el hareketleri ata.</string>
-    <string name="gestures_allow_links" maxLength="41">Linklerde el hareketlerini görmezden gel</string>
-    <string name="gestures_allow_links_summary">Bir linke/ipucuna basılırsa el hareketleri işlenmez.</string>
     <string name="gestures_corner_touch" maxLength="41">9 noktadan dokunma</string>
     <string name="gestures_corner_touch_summary">Ekran köşelerinde dokunma hareketlerine izin ver</string>
     <string name="gestures_full_screen_nav_drawer" maxLength="41">Tam ekran gezinme çekmecesi</string>
-    <string name="gestures_fullscreen_nav_drawer_summary">Open navigation drawer when swiped right from anywhere on the screen</string>
+    <string name="gestures_fullscreen_nav_drawer_summary">Ekranın üzerindeki herhangi bir yerden sağa doğru parmağınızı kaydırdığınızda bütün dosyaların genel görünümü için bir önizleme açılacaktır</string>
     <string name="gestures_swipe_up" maxLength="41">Yukarı sürükleme</string>
     <string name="gestures_swipe_down" maxLength="41">Aşağı sürükleme</string>
     <string name="gestures_swipe_left" maxLength="41">Sola sürükleme</string>
@@ -117,8 +115,6 @@
     <string name="gestures_corner_tap_bottom_left" maxLength="41">Sol alta dokun</string>
     <string name="gestures_corner_tap_bottom_center">Orta alta dokun</string>
     <string name="gestures_corner_tap_bottom_right" maxLength="41">Sağ alta dokun</string>
-    <string name="gestures_volume_up" maxLength="41">Sesi aç</string>
-    <string name="gestures_volume_down" maxLength="41">Sesi kıs</string>
     <string name="more_scrolling_buttons" maxLength="41">eOkuyucu</string>
     <string name="more_scrolling_buttons_summ">Kaydırma için Kanji/Katakana, Emoji/Kao-moji düğmelerini de kullan</string>
     <string name="card_browser_enable_external_context_menu">\"%s\" Menüsü</string>
@@ -215,8 +211,8 @@
     <string name="exit_via_double_tap_back" maxLength="41">Geri gitmek/çıkmak için iki kez basın</string>
     <string name="exit_via_double_tap_back_summ">Yorumcudan veya uygulamadan yanlışlıkla ayrılmamak için</string>
     <!-- Allow all files in media imports -->
-    <string name="media_import_allow_all_files" maxLength="41">Allow all files in media imports</string>
-    <string name="media_import_allow_all_files_summ">If Android doesn’t recognize a media file</string>
+    <string name="media_import_allow_all_files" maxLength="41">Yüklenmiş medyaların tümüne izin verin</string>
+    <string name="media_import_allow_all_files_summ">Bir medya dosyasını Android tanımazsa</string>
     <!-- Advanced statistics settings -->
     <string name="advanced_statistics_title" maxLength="41">İleri düzey istatistikler</string>
     <string name="enable_advanced_statistics_title" maxLength="41">İleri düzey istatistikleri etkinleştir</string>
@@ -233,7 +229,7 @@
     <string name="custom_sync_server_media_url_title" maxLength="41">Medya Senkronizasyon Url\'i</string>
     <string name="custom_sync_server_media_url_invalid">Medya senkronizasyonu urli geçersiz</string>
     <!-- Key Bindings -->
-    <string name="controls_main_category" maxLength="41">Command mapping</string>
+    <string name="controls_main_category" maxLength="41">Her bir elemana erişim komutu</string>
     <!-- studyoptions -->
     <string name="deck_conf_group_summ">Deste grubu seçeneklerinde yapılan değişiklikler birden fazla desteyi etkiler. Eğer sadece şu anki desteyi değiştirmek istiyorsanız, lütfen önce yeni bir seçenek grubu ekleyin.</string>
     <string name="studyoptions_limit_select_tags">Etiketleri Seçin</string>
